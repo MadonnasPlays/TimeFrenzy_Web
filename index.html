@@ -118,7 +118,7 @@ var ms = 0;
 var sec = 0;
 var roundms;
 var points;
-var bestscore = 1000;
+var bestscore;
 
 function start_watch(){
 	if(!started){
@@ -128,6 +128,7 @@ function start_watch(){
 		sec_elem = document.getElementById('sec');
 		lap_elem = document.getElementById('lap');
 		best_elem = document.getElementById('best');
+		bestscore = 1000;
 		window.requestAnimationFrame(step);
 	}else{
 		roundms = Math.round(ms);
@@ -139,7 +140,7 @@ function start_watch(){
 			lap_elem.innerHTML = points;
 		}
 		checkbestscore();
-		if(bestscore = 1000) {
+		if(bestscore == 1000) {
 			best_elem.innerHTML = "NaN";
 		}else{
 			best_elem.innerHTML = bestscore;
