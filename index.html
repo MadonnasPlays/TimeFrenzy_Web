@@ -139,10 +139,8 @@ function start_watch(){
 			points = 1000 - roundms;
 			lap_elem.innerHTML = points;
 		}
-		checkbestscore();
-		if(bestscore == 1000) {
-			best_elem.innerHTML = "NaN";
-		}else{
+		if(points < bestscore) {
+			bestscore = points;
 			best_elem.innerHTML = bestscore;
 		}
 	}
@@ -161,10 +159,6 @@ function step(timestamp) {
   	ms_elem.innerHTML = Math.round(ms);
   	sec_elem.innerHTML = sec;
   	window.requestAnimationFrame(step);
-}
-
-function checkbestscore() {
-	if(points < bestscore) bestscore = points;
 }
 
 </script>
