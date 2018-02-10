@@ -56,14 +56,21 @@
 				<div class="row">
 					<div class="col s12">
 						<div>
-							<a class="waves-effect waves-light btn" onClick="start_watch()">Play</a>
+							This click: <span id="lap"></span>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s12">
 						<div>
-							<span id="lap"></span>
+							Best click: <span id="best"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+						<div>
+							<a class="waves-effect waves-light btn" onClick="start_watch()">Play</a>
 						</div>
 					</div>
 				</div>
@@ -111,6 +118,7 @@ var ms = 0;
 var sec = 0;
 var roundms;
 var points;
+var bestscore = 1000;
 
 function start_watch(){
 	if(!started){
@@ -119,6 +127,7 @@ function start_watch(){
 		ms_elem = document.getElementById('ms');
 		sec_elem = document.getElementById('sec');
 		lap_elem = document.getElementById('lap');
+		best_elem = document.getElementById('best');
 		window.requestAnimationFrame(step);
 	}else{
 		roundms = Math.round(ms);
@@ -129,6 +138,12 @@ function start_watch(){
 			points = 1000 - roundms;
 			lap_elem.innerHTML = points;
 		}
+		checkbestscore();
+		if(bestscore = 1000) {
+			best_elem.innerHTML = "NaN";
+		}else{
+			best_elem.innerHTML = bestscore;
+		}
 	}
 }
 
@@ -138,13 +153,17 @@ function step(timestamp) {
 	lastFrame = timestamp;
 	ms += this_frame;
 	if(ms > 1000){
-    	sec++;
-    	ms = 0;
-    }
+    		sec++;
+    		ms = 0;
+    	}
 	if(sec >= 60) sec = 0;
   	ms_elem.innerHTML = Math.round(ms);
   	sec_elem.innerHTML = sec;
   	window.requestAnimationFrame(step);
+}
+
+function checkbestscore() {
+	if(points < bestscore) bestscore = points;
 }
 
 </script>
