@@ -109,6 +109,8 @@ var sec_elem;
 var lap_elem;
 var ms = 0;
 var sec = 0;
+var roundms;
+var points;
 
 function start_watch(){
 	if(!started){
@@ -119,7 +121,14 @@ function start_watch(){
 		lap_elem = document.getElementById('lap');
 		window.requestAnimationFrame(step);
 	}else{
-		lap_elem.innerHTML = Math.round(ms) + "<br>" + lap_elem.innerHTML;
+		roundms = Math.round(ms);
+		if(roundms <= 500){
+			points = roundms;
+			lap_elem.innerHTML = points;
+		}else if(roundms > 500){
+			points = 1000 - roundms;
+			lap_elem.innerHTML = points;
+		}
 	}
 }
 
