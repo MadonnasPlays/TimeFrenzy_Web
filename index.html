@@ -48,7 +48,7 @@
 					<div class="col s12">
 						<div>
 							<h3><b>
-								<span id="sec">0</span> : <span id="ms">000</span>
+								<span id="sec">0</span> : <span id="ms">0</span>
 							</b></h3>
 						</div>
 					</div>
@@ -56,14 +56,14 @@
 				<div class="row">
 					<div class="col s12">
 						<div>
-							This click: <b><span id="lap">NaN</span></b>
+							This click: <b><span id="lap">-</span></b>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s12">
 						<div>
-							Best click: <b><span id="best">NaN</span></b>
+							Best click: <b><span id="best">-</span></b>
 						</div>
 					</div>
 				</div>
@@ -111,27 +111,37 @@
 
 var lastFrame = null;
 var started = false;
+var clicked = false;
+
 var ms_elem;
 var sec_elem;
 var lap_elem;
-var ms = 0;
+var best_elem;
+
 var sec = 0;
+var ms = 0;
 var roundms;
+
 var points;
-var bestscore;
+var bestscore = 1000;
 
 function start_watch(){
-	if(!started){
+	if(!started && !clicked){
 		started = true;
 		lastFrame = null;
+
 		ms_elem = document.getElementById('ms');
 		sec_elem = document.getElementById('sec');
 		lap_elem = document.getElementById('lap');
 		best_elem = document.getElementById('best');
-		bestscore = 1000;
+
 		window.requestAnimationFrame(step);
-	}else{
+	}else if(started && !clicked) {
+		started = false;
+		clicked = true;
+
 		roundms = Math.round(ms);
+		
 		if(roundms <= 500){
 			points = roundms;
 			lap_elem.innerHTML = points;
@@ -139,26 +149,42 @@ function start_watch(){
 			points = 1000 - roundms;
 			lap_elem.innerHTML = points;
 		}
+
+		ms_elem.innerHTML = roundms;
+  		sec_elem.innerHTML = sec;
+
 		if(points < bestscore) {
 			bestscore = points;
 			best_elem.innerHTML = bestscore;
 		}
+	}else if(!started && clicked) {
+		clicked = false;
+		ms = 0;
+		sec = 0;
+		ms_elem.innerHTML = 0;
+  		sec_elem.innerHTML = 0;
 	}
 }
 
 function step(timestamp) {
 	if (!lastFrame) lastFrame = timestamp;
+
 	var this_frame = timestamp - lastFrame;
 	lastFrame = timestamp;
 	ms += this_frame;
+	
 	if(ms > 1000){
-    		sec++;
-    		ms = 0;
-    	}
+    	sec++;
+    	ms = 0;
+    }
+
 	if(sec >= 60) sec = 0;
-  	ms_elem.innerHTML = Math.round(ms);
-  	sec_elem.innerHTML = sec;
-  	window.requestAnimationFrame(step);
+
+  	if(started) {
+  		ms_elem.innerHTML = Math.round(ms);
+ 	 	sec_elem.innerHTML = sec;
+  		window.requestAnimationFrame(step);
+  	}
 }
 
 </script>
