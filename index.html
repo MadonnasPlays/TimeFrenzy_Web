@@ -7,117 +7,195 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<title>TimeFrenzy | Stopwatch game</title>
+	<link rel="icon" href="images/icon.png">
+	<title>Time Frenzy</title>
 </head>
 
 <style>
-	.top-margin-50{
-		margin-top: 50px;
+	.white-an{
+		background: #FFFFFF;
 	}
-	/*
-	.tester-border{
-		border: solid 3px black;
+	.blue-grey-an{
+		box-shadow: -6px 6px 7px #607D8B;
+		background: #263238;
 	}
-	*/
+	.deep-orange-an{
+		background: #FF6E40;
+	}
+	.logo-name{
+		font-weight: bold;
+		color: #FFFFFF;
+	}
+	.large-button-me{
+		background-color: #FF6E40;
+	    color: #FFFFFF;
+	    text-align: center;
+	    font-size: 16px;
+	    font-weight: bold;
+	    border: none;
+	    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.button-lvl{
+	    padding: 14px 100px;
+	}
+	.button-comp{
+	    padding: 14px 75px;
+	}
+	.square-buttons{
+		background-color: #FF6E40;
+	    text-align: center;
+	    padding: 12px;
+    	padding-bottom: 8px;
+	    border: none;
+	    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.large-button-me:hover {
+	    background-color: #DD2C00;
+	}
+	.square-buttons:hover {
+	    background-color: #DD2C00;
+	}
+	.large-button-me:focus {
+	    background-color: #DD2C00;
+	}
+	.square-buttons:focus {
+		background-color: #DD2C00;
+	}
+	.large-button-me:active {
+	  background-color: #DD2C00;
+	  box-shadow: 0 4px #666;
+	  transform: translateY(4px);
+	}
+	.square-buttons:active {
+	  background-color: #DD2C00;
+	  box-shadow: 0 4px #666;
+	  transform: translateY(4px);
+	}
 </style>
 
-<body class="grey lighten-1">
+<body class="grey lighten-1" onLoad="onBodyLoad()">
 
-	<div class="container">
+	<div class="container blue-grey-an" style="padding-top:15px">
+		<audio id="music">
+		  <source src="music.wav" type="audio/wav">
+		</audio>
+		<div class="row">
 
-		<div class="row top-margin-50">
-			<!-- advertising -->
 			<div class="col l2 center-align">
-				<!--
-				<div class="card">
-					<div class="card-content white-text">
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">AD</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-					</div>
-				</div>
-				-->
 			</div>
 			
-			<!-- MAIN_GAME -->
-			<div class="col l8 s12 center-align tester-border">
-				<div class="row">
-					<div class="col s12">
-						<div>
-							<h3><b>
-								<span id="sec">0</span> : <span id="ms">0</span>
-							</b></h3>
-						</div>
+			<!-- mainMenu -->
+			<div id="mainMenu" class="col l8 s12 center-align">
+				<div class="row right-align">
+					<div class="col l12 s12">
+						<img id="muteButton1" src="images/volume.png" alt="music" onClick="muteMusic()">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col s12">
-						<div>
-							This click: <b><span id="lap">-</span></b>
-						</div>
-					</div>
+					<h3 class="logo-name">Time Frenzy</h3>
 				</div>
 				<div class="row">
-					<div class="col s12">
-						<div>
-							Best click: <b><span id="best">-</span></b>
-						</div>
-					</div>
+					<img src="images/logo.png" width="30%" height="30%" alt="logo">
+				</div>
+				<div class="row" style="margin-top:70px;">
+					<button class="large-button-me button-lvl" onClick="play()">LEVELS</button>
 				</div>
 				<div class="row">
-					<div class="col s12">
-						<div>
-							<a class="waves-effect waves-light btn" onClick="start_watch()">Play</a>
-						</div>
-					</div>
+					<a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank"><button class="large-button-me button-comp">COMPETITIVE</button></a>
 				</div>
-			</div>
-						<!-- advertising -->
-			<div class="col l2 center-align">
-				<!--
-				<div class="card">
-					<div class="card-content white-text">
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">AD</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-						<div class="black-text">|</div>
-					</div>
-				</div>
-				-->
-			</div>
-		</div>
+				<div class="row" style="margin-top:90px;">
+					<div class="col l2 center-align"></div>
 
-		<!-- advertising
-		<div class="row">
-			<div class="col s12 center-align">
-				<div class="card">
-					<div class="card-content white-text">
-						<div class="black-text">- - - AD - - -</div>
+					<div class="col l2 center-align">
+						<a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank"><button class="square-buttons"><img src="images/leaderboard.png" width="40px" height="40px" alt="settings"></button></a>
 					</div>
+
+					<div class="col l1 center-align"></div>
+
+					<div class="col l2 center-align">
+						<button class="square-buttons"><img src="images/settings.png" width="40px" height="40px" alt="settings"></button>
+					</div>
+
+					<div class="col l1 center-align"></div>
+
+					<div class="col l2 center-align">
+						<button class="square-buttons"><img src="images/info.png" width="40px" height="40px" alt="settings"></button>
+					</div>
+
+					<div class="col l2 center-align"></div>
+				</div>
+				<div class="row" style="margin-top:50px;">
+					<a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank"><img src="images/google-play.png" width="70%" height="70%" alt="googleplay"></a>
 				</div>
 			</div>
+
+			<!-- levelsMenu -->
+			<div id="levelsMenu" class="col l8 s12 center-align" style="display:none; color:white;">
+				<div class="row">
+					<div class="col l6 s6 left-align">
+						<img id="backButton" src="images/back.png" alt="back" onClick="back()">
+					</div>
+					<div class="col l6 s6 right-align">
+						<img id="muteButton2" src="images/volume.png" alt="music" onClick="muteMusic()">
+					</div>
+				</div>
+				<div class="row">
+					<h3 class="logo-name">Time Frenzy</h3>
+				</div>
+				<div class="row">
+					<img src="images/logo.png" width="30%" height="30%" alt="logo">
+				</div>
+				<div class="row" style="margin-top:50px; margin-bottom:0px">
+					<div class="col l4 left-align">
+						<h5>Best: <b><span id="best">1000</span></b></h5>
+					</div>					
+					<div class="col l4">
+						<h5><b><span id="lap"></span></b></h5>
+					</div>
+					<div class="col l4">
+					</div>
+				</div>
+				<div class="row">
+					<h1 style="margin-top:0px"><b>
+						<span id="sec">0</span> : <span id="ms">0</span>
+					</b></h1>
+				</div>
+				<div class="row">
+					<button class="large-button-me button-comp" onClick="start_watch()">PLAY</button>
+				</div>
+				<div class="row" style="margin-top:50px;">
+					<a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank"><img src="images/google-play.png" width="70%" height="70%" alt="googleplay"></a>
+				</div>
+			</div>
+
+			<div class="col l2 center-align">
+			</div>
 		</div>
-		-->
 	</div>
+	<footer class="page-footer blue-grey-an">
+        <div class="container">
+            <div class="row">
+            	<div class="col l6 s12">
+                	<h5 class="white-text">Time Frenzy | Stopwatch game</h5>
+                	<p class="grey-text text-lighten-4">You can unlock full game by download it from <a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank">Google Play</a>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright" style="border-top:solid 1px #37474F;">
+            <div class="container">
+            © 2018 Copyright MadonnasPlays
+            </div>
+        </div>
+    </footer>
 </body>
 
 <script>
-
 var lastFrame = null;
 var started = false;
 var clicked = false;
 
+var mainMenu;
+var levelsMenu;
 var ms_elem;
 var sec_elem;
 var lap_elem;
@@ -130,21 +208,61 @@ var roundms;
 var points;
 var bestscore = 1000;
 
+var audio;
+
+var backButton;
+var muteButton1;
+var muteButton2;
+
+
+function onBodyLoad(){
+	mainMenu = document.getElementById("mainMenu");
+	levelsMenu = document.getElementById("levelsMenu");
+
+	audio = document.getElementById("music");
+	audio.loop = true;
+    audio.load();
+	audio.play();
+
+	muteButton1 = document.getElementById("muteButton1");
+	muteButton2 = document.getElementById("muteButton2");
+	backButton = document.getElementById("back");
+}
+
+function muteMusic(){
+	if (muteButton1.getAttribute('src') == "images/volume.png"){
+		audio.pause();
+		muteButton1.src = "images/volume_off.png";
+		muteButton2.src = "images/volume_off.png";
+	}else if(muteButton1.getAttribute('src') == "images/volume_off.png"){
+		audio.play();
+		muteButton1.src = "images/volume.png";
+		muteButton2.src = "images/volume.png";
+	}
+}
+
+function play(){
+	mainMenu.style.display = "none";
+	levelsMenu.style.display = "block";
+}
+
+function back(){
+	mainMenu.style.display = "block";
+	levelsMenu.style.display = "none";
+}
+
 function start_watch(){
 	if(!started && !clicked){
 		started = true;
 		lastFrame = null;
-
 		ms_elem = document.getElementById('ms');
 		sec_elem = document.getElementById('sec');
 		lap_elem = document.getElementById('lap');
 		best_elem = document.getElementById('best');
-
 		window.requestAnimationFrame(step);
 	}else if(started && !clicked) {
 		started = false;
 		clicked = true;
-
 		roundms = Math.round(ms);
 		
 		if(roundms <= 500){
@@ -154,10 +272,8 @@ function start_watch(){
 			points = 1000 - roundms;
 			lap_elem.innerHTML = points;
 		}
-
 		ms_elem.innerHTML = roundms;
   		sec_elem.innerHTML = sec;
-
 		if(points < bestscore) {
 			bestscore = points;
 			best_elem.innerHTML = bestscore;
@@ -173,7 +289,6 @@ function start_watch(){
 
 function step(timestamp) {
 	if (!lastFrame) lastFrame = timestamp;
-
 	var this_frame = timestamp - lastFrame;
 	lastFrame = timestamp;
 	ms += this_frame;
@@ -182,16 +297,13 @@ function step(timestamp) {
     	sec++;
     	ms = 0;
     }
-
 	if(sec >= 60) sec = 0;
-
   	if(started) {
   		ms_elem.innerHTML = Math.round(ms);
  	 	sec_elem.innerHTML = sec;
   		window.requestAnimationFrame(step);
   	}
 }
-
 </script>
 
 </html>
