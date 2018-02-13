@@ -125,7 +125,7 @@
 					<div class="col l2 center-align"></div>
 				</div>
 				<div class="row" style="margin-top:50px;">
-					<a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank"><img src="images/google-play.png" width="70%" height="70%" alt="googleplay"></a>
+					<a href="https://play.google.com/store/apps/details?id=com.avoupavou.newtonsdisc" target="_blank"><img src="images/google-play.png" width="40%" height="40%" alt="googleplay"></a>
 				</div>
 			</div>
 
@@ -221,14 +221,16 @@ function onBodyLoad(){
 
 	audio = document.getElementById("music");
 	audio.loop = true;
-    audio.load();
-	//audio.play();
-	muteButton1.src = "images/volume_off.png";
-	muteButton2.src = "images/volume_off.png";
-
+    	audio.load();
+	
 	muteButton1 = document.getElementById("muteButton1");
 	muteButton2 = document.getElementById("muteButton2");
 	backButton = document.getElementById("back");
+	
+	audio.pause();
+	muteButton1.src = "images/volume_off.png";
+	muteButton2.src = "images/volume_off.png";
+
 }
 
 function muteMusic(){
