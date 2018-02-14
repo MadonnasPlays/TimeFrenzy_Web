@@ -98,7 +98,7 @@
 				<div class="row">
 					<h3 class="logo-name">Time Frenzy</h3>
 				</div>
-				<div class="row">
+				<div id="image_logo" class="row">
 					<img src="images/TimeFrenzy_Logo.gif" width="30%" height="30%" alt="logo">
 				</div>
 
@@ -166,14 +166,14 @@
 						</b></h1>
 					</div>
 					<div class="row">
-						<button class="large-button-me button-comp" onClick="start_watch()">PLAY</button>
+						<button class="large-button-me button-comp" onClick="onPlayClicked()">PLAY</button>
 					</div>
 				</div>
 
 				<!-- Static -->
 				<!-- Google_play -->
 				<div class="row" style="margin-top:50px;">
-					<a href="#" target="_blank"><img src="images/google-play.png" width="45%" height="45%" alt="googleplay"></a>
+					<a href="#" target="_blank"><img src="images/google-play.png" width="40%" height="40%" alt="googleplay"></a>
 				</div>
 			</div>
 
@@ -204,6 +204,7 @@ var mainMenu;
 var infoMenu;
 var settingsMenu;
 var levelsMenu;
+var imageLogo;
 //TabsOn
 var mainMenuOn;
 var infoMenuOn;
@@ -227,8 +228,6 @@ var best_elem;
 var lap_elem;
 var sec = 0;
 var ms = 0;
-var roundms;
-var points;
 var bestscore = 1000;
 
 function onBodyLoad(){
@@ -237,6 +236,7 @@ function onBodyLoad(){
 	infoMenu = document.getElementById("infoMenu");
 	settingsMenu = document.getElementById("settingsMenu");
 	levelsMenu = document.getElementById("levelsMenu");
+	imageLogo = document.getElementById("image_logo");
 	
 	//fetch timer elements
 	ms_elem = document.getElementById('ms');
@@ -255,12 +255,13 @@ function onBodyLoad(){
 	audio.loop = true;
     audio.load();
 	//audio.play();
-	muteMusic();
+	
 	
 	//StaticButtons
 	muteButton = document.getElementById("muteButton");
 	backButton = document.getElementById("backButton");
 	
+	muteMusic();
 }
 
 //MuteButton
@@ -295,6 +296,7 @@ function settings(){
 //LevelsButton
 function play(){
 	mainMenu.style.display = "none";
+	imageLogo.style.visibility="hidden"
 	levelsMenu.style.display = "block";
 	backButton.style.display = "block";
 	mainMenuOn = false;
@@ -313,6 +315,7 @@ function back(){
 		mainMenu.style.display = "block";
 		levelsMenu.style.display = "none";
 		backButton.style.display = "none";
+		imageLogo.style.visibility="visible"
 		mainMenuOn = true;
 		levelsMenuOn = false;
 	}else if(settings){
@@ -325,7 +328,10 @@ function back(){
 }
 
 //PlayTab
-function start_watch(){
+function onPlayClicked(){
+	var roundms;
+	var points;
+	
 	if(!started && !clicked){
 		started = true;
 		lastFrame = null;
@@ -333,26 +339,35 @@ function start_watch(){
 	}else if(started && !clicked) {
 		started = false;
 		clicked = true;
+		
 		roundms = Math.round(ms);
-		if(roundms <= 500){
-			points = roundms;
-			lap_elem.innerHTML = points;
-		}else if(roundms > 500){
-			points = 1000 - roundms;
-			lap_elem.innerHTML = points;
-		}
+		points = calculateScore(roundms);
+		lap_elem.innerHTML = points;
 		ms_elem.innerHTML = roundms;
   		sec_elem.innerHTML = sec;
+		
 		if(points < bestscore) {
 			bestscore = points;
 			best_elem.innerHTML = "Best: " + bestscore;
 		}
+		
 	}else if(!started && clicked) {
 		clicked = false;
 		ms = 0;
 		sec = 0;
 		ms_elem.innerHTML = 0;
   		sec_elem.innerHTML = 0;
+	}
+}
+
+function calculateScore(roundMs){
+	var points;
+	if(roundMs <= 500){
+		points = roundMs;
+		return points;
+	}else{
+		points = 1000 - roundMs;
+		return points;
 	}
 }
 
