@@ -237,6 +237,13 @@ function onBodyLoad(){
 	infoMenu = document.getElementById("infoMenu");
 	settingsMenu = document.getElementById("settingsMenu");
 	levelsMenu = document.getElementById("levelsMenu");
+	
+	//fetch timer elements
+	ms_elem = document.getElementById('ms');
+	sec_elem = document.getElementById('sec');
+	lap_elem = document.getElementById('lap');
+	best_elem = document.getElementById('best');
+	
 	//TabsOn
 	mainMenuOn = true;
 	infoMenuOn = false;
@@ -247,7 +254,8 @@ function onBodyLoad(){
 	audio = document.getElementById("music");
 	audio.loop = true;
     audio.load();
-	audio.play();
+	//audio.play();
+	muteMusic();
 	
 	//StaticButtons
 	muteButton = document.getElementById("muteButton");
@@ -321,16 +329,11 @@ function start_watch(){
 	if(!started && !clicked){
 		started = true;
 		lastFrame = null;
-		ms_elem = document.getElementById('ms');
-		sec_elem = document.getElementById('sec');
-		lap_elem = document.getElementById('lap');
-		best_elem = document.getElementById('best');
 		window.requestAnimationFrame(step);
 	}else if(started && !clicked) {
 		started = false;
 		clicked = true;
 		roundms = Math.round(ms);
-		
 		if(roundms <= 500){
 			points = roundms;
 			lap_elem.innerHTML = points;
