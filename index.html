@@ -84,59 +84,15 @@
 			<div class="col l2 center-align">
 			</div>
 			
-			<!-- mainMenu -->
-			<div id="mainMenu" class="col l8 s12 center-align">
-				<div class="row right-align">
-					<div class="col l12 s12">
-						<img id="muteButton1" src="images/volume.png" alt="music" onClick="muteMusic()">
-					</div>
-				</div>
-				<div class="row">
-					<h3 class="logo-name">Time Frenzy</h3>
-				</div>
-				<div class="row">
-					<img src="images/TimeFrenzy_Logo.gif" width="30%" height="30%" alt="logo">
-				</div>
-				<div class="row" style="margin-top:70px;">
-					<button class="large-button-me button-lvl" onClick="play()">LEVELS</button>
-				</div>
-				<div class="row">
-					<a href="#" target="_blank"><button class="large-button-me button-comp">COMPETITIVE</button></a>
-				</div>
-				<div class="row" style="margin-top:90px;">
-					<div class="col l2 s2 center-align"></div>
-
-					<div class="col l2 s2 center-align">
-						<a href="#" target="_blank"><button class="square-buttons"><img src="images/leaderboard.png" width="40px" height="40px" alt="settings"></button></a>
-					</div>
-
-					<div class="col l1 s1 center-align"></div>
-
-					<div class="col l2 s2 center-align">
-						<button class="square-buttons"><img src="images/settings.png" width="40px" height="40px" alt="settings"></button>
-					</div>
-
-					<div class="col l1 s1 center-align"></div>
-
-					<div class="col l2 s2 center-align">
-						<button class="square-buttons"><img src="images/info.png" width="40px" height="40px" alt="settings"></button>
-					</div>
-
-					<div class="col l2 s2 center-align"></div>
-				</div>
-				<div class="row" style="margin-top:50px;">
-					<a href="#" target="_blank"><img src="images/google-play.png" width="40%" height="40%" alt="googleplay"></a>
-				</div>
-			</div>
-
-			<!-- levelsMenu -->
-			<div id="levelsMenu" class="col l8 s12 center-align" style="display:none; color:white;">
+			<!-- Static -->
+			<!-- Logo,icons -->
+			<div class="col l8 s12 center-align">
 				<div class="row">
 					<div class="col l6 s6 left-align">
-						<img id="backButton" src="images/back.png" alt="back" onClick="back()">
+						<img id="backButton" src="images/back.png" alt="back" onClick="back()" style="display:none;"">
 					</div>
 					<div class="col l6 s6 right-align">
-						<img id="muteButton2" src="images/volume.png" alt="music" onClick="muteMusic()">
+						<img id="muteButton" src="images/volume.png" alt="music" onClick="muteMusic()">
 					</div>
 				</div>
 				<div class="row">
@@ -145,26 +101,79 @@
 				<div class="row">
 					<img src="images/TimeFrenzy_Logo.gif" width="30%" height="30%" alt="logo">
 				</div>
-				<div class="row" style="margin-top:50px; margin-bottom:0px">
-					<div class="col l4 left-align">
-						<h5>Best: <b><span id="best">1000</span></b></h5>
-					</div>					
-					<div class="col l4">
+
+				<!-- Changeable -->
+				<!-- MainMenu -->
+				<div class="row" id="mainMenu">
+					<div class="row" style="margin-top:70px;">
+						<button class="large-button-me button-lvl" onClick="play()">LEVELS</button>
+					</div>
+					<div class="row">
+						<a href="#" target="_blank"><button class="large-button-me button-comp">COMPETITIVE</button></a>
+					</div>
+					<div class="row" style="margin-top:90px;">
+						<div class="col l2 s2 center-align"></div>
+
+						<div class="col l2 s2 center-align">
+							<a href="#" target="_blank"><button class="square-buttons"><img src="images/leaderboard.png" width="40px" height="40px" alt="leaderboard"></button></a>
+						</div>
+
+						<div class="col l1 s1 center-align"></div>
+
+						<div class="col l2 s2 center-align">
+							<button class="square-buttons" onClick="settings()"><img src="images/settings.png" width="40px" height="40px" alt="settings"></button>
+						</div>
+
+						<div class="col l1 s1 center-align"></div>
+
+						<div class="col l2 s2 center-align">
+							<button class="square-buttons" onClick="info()"><img src="images/info.png" width="40px" height="40px" alt="info"></button>
+						</div>
+
+						<div class="col l2 s2 center-align"></div>
+					</div>
+				</div>
+
+				<!-- InfoTab -->
+				<div class="row" id="infoMenu" style="margin-top:50px; margin-bottom:0px; display:none; color:white;">
+					<div>
+						Web Developer: DiVouz
+					</div>
+					<div>
+						Game and Web Designer: DiVouz
+					</div>
+					<div>
+						Game Developer: PaVou
+					</div>
+				</div>
+
+				<!-- SettingsTab -->
+				<div class="row" id="settingsMenu" style="margin-top:50px; margin-bottom:0px; display:none; color:white;">
+					<div>
+						Settings
+					</div>
+				</div>
+
+				<!-- LevelsTab -->
+				<div class="row" id="levelsMenu" style="display:none; color:white;">
+					<div class="row" style="margin-top:50px; margin-bottom:0px">
+						<h5><b><span id="best"></span></b></h5>
+					</div>
+					<div class="row">
 						<h5><b><span id="lap"></span></b></h5>
+						<h1 style="margin-top:0px"><b>
+							<span id="sec">0</span> : <span id="ms">000</span>
+						</b></h1>
 					</div>
-					<div class="col l4">
+					<div class="row">
+						<button class="large-button-me button-comp" onClick="start_watch()">PLAY</button>
 					</div>
 				</div>
-				<div class="row">
-					<h1 style="margin-top:0px"><b>
-						<span id="sec">0</span> : <span id="ms">0</span>
-					</b></h1>
-				</div>
-				<div class="row">
-					<button class="large-button-me button-comp" onClick="start_watch()">PLAY</button>
-				</div>
+
+				<!-- Static -->
+				<!-- Google_play -->
 				<div class="row" style="margin-top:50px;">
-					<a href="#" target="_blank"><img src="images/google-play.png" width="40%" height="40%" alt="googleplay"></a>
+					<a href="#" target="_blank"><img src="images/google-play.png" width="45%" height="45%" alt="googleplay"></a>
 				</div>
 			</div>
 
@@ -183,78 +192,131 @@
           </div>
           <div class="footer-copyright" style="border-top:solid 1px #37474F;">
             <div class="container">
-            © 2018 Copyright MadonnasPlays
+            	© 2018 Copyright MadonnasPlays
             </div>
         </div>
     </footer>
 </body>
 
 <script>
+//Tabs
+var mainMenu;
+var infoMenu;
+var settingsMenu;
+var levelsMenu;
+//TabsOn
+var mainMenuOn;
+var infoMenuOn;
+var settingsMenuOn;
+var levelsMenuOn;
+
+//Audio
+var audio;
+
+//Buttons
+var backButton;
+var muteButton;
+
+//PlayTab
 var lastFrame = null;
 var started = false;
 var clicked = false;
-
-var mainMenu;
-var levelsMenu;
-var ms_elem;
 var sec_elem;
-var lap_elem;
+var ms_elem;
 var best_elem;
-
+var lap_elem;
 var sec = 0;
 var ms = 0;
 var roundms;
-
 var points;
 var bestscore = 1000;
 
-var audio;
-
-var backButton;
-var muteButton1;
-var muteButton2;
-
-
 function onBodyLoad(){
+	//Tabs
 	mainMenu = document.getElementById("mainMenu");
+	infoMenu = document.getElementById("infoMenu");
+	settingsMenu = document.getElementById("settingsMenu");
 	levelsMenu = document.getElementById("levelsMenu");
+	//TabsOn
+	mainMenuOn = true;
+	infoMenuOn = false;
+	settingsMenuOn = false;
+	levelsMenuOn = false;
 
+	//Audio
 	audio = document.getElementById("music");
 	audio.loop = true;
-    	audio.load();
+    audio.load();
+	audio.play();
 	
-	muteButton1 = document.getElementById("muteButton1");
-	muteButton2 = document.getElementById("muteButton2");
-	backButton = document.getElementById("back");
+	//StaticButtons
+	muteButton = document.getElementById("muteButton");
+	backButton = document.getElementById("backButton");
 	
-	audio.pause();
-	muteButton1.src = "images/volume_off.png";
-	muteButton2.src = "images/volume_off.png";
-
 }
 
+//MuteButton
 function muteMusic(){
-	if (muteButton1.getAttribute('src') == "images/volume.png"){
+	if (muteButton.getAttribute('src') == "images/volume.png"){
 		audio.pause();
-		muteButton1.src = "images/volume_off.png";
-		muteButton2.src = "images/volume_off.png";
-	}else if(muteButton1.getAttribute('src') == "images/volume_off.png"){
+		muteButton.src = "images/volume_off.png";
+	}else if(muteButton.getAttribute('src') == "images/volume_off.png"){
 		audio.play();
-		muteButton1.src = "images/volume.png";
-		muteButton2.src = "images/volume.png";
+		muteButton.src = "images/volume.png";
 	}
 }
 
+//infoButton
+function info(){
+	mainMenu.style.display = "none";
+	infoMenu.style.display = "block";
+	backButton.style.display = "block";
+	mainMenuOn = false;
+	infoMenuOn = true;
+}
+
+//settingsButton
+function settings(){
+	mainMenu.style.display = "none";
+	settingsMenu.style.display = "block";
+	backButton.style.display = "block";
+	mainMenuOn = false;
+	settingsMenuOn = true;
+}
+
+//LevelsButton
 function play(){
 	mainMenu.style.display = "none";
 	levelsMenu.style.display = "block";
+	backButton.style.display = "block";
+	mainMenuOn = false;
+	levelsMenuOn = true;
 }
 
+//BackButton
 function back(){
-	mainMenu.style.display = "block";
-	levelsMenu.style.display = "none";
+	if(infoMenuOn){
+		mainMenu.style.display = "block";
+		infoMenu.style.display = "none";
+		backButton.style.display = "none";
+		mainMenuOn = true;
+		infoMenuOn = false;
+	}else if(levelsMenuOn){
+		mainMenu.style.display = "block";
+		levelsMenu.style.display = "none";
+		backButton.style.display = "none";
+		mainMenuOn = true;
+		levelsMenuOn = false;
+	}else if(settings){
+		mainMenu.style.display = "block";
+		settingsMenu.style.display = "none";
+		backButton.style.display = "none";
+		mainMenuOn = true;
+		settingsMenuOn = false;
+	}
 }
 
+//PlayTab
 function start_watch(){
 	if(!started && !clicked){
 		started = true;
@@ -280,7 +342,7 @@ function start_watch(){
   		sec_elem.innerHTML = sec;
 		if(points < bestscore) {
 			bestscore = points;
-			best_elem.innerHTML = bestscore;
+			best_elem.innerHTML = "Best: " + bestscore;
 		}
 	}else if(!started && clicked) {
 		clicked = false;
